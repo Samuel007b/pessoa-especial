@@ -1,15 +1,164 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-	  <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title> Irmãos </title>
-		<link rel="stylesheet" href="css/estilo.css">
-  </head>
-  <body>
-    <h1>Daniel & Miguel</h1>
-    <p>...</p>
-		<br>
-		<p>Assinado: Samuel Miranda de Carvalho</p>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title> Irmãos </title>
+	<link rel="stylesheet" href="css/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+  <h1>
+    <img id="img" src="img/mine.png">
+    Minebrothers
+    <img id="img" src="img/mine.png">
+  </h1>
+</header>
+<section>
+    <h2>🎮 Players</h2>
+    <img id="img" src="img/daniel.png">
+    <div class="card">
+        <p>Nome: Daniel</p>
+        <p>Classe: Demolidor</p>
+        <p>Nível: 11</p>
+        <p>Habilidade: Quebrar tudo</p>
+    </div>
+    <div class="card">
+        <p>Nome: Miguel</p>
+        <p>Classe: Bagunceiro</p>
+        <p>Nível: 8</p>
+        <p>Habilidade: Irritar</p>
+    </div>
+    <img id="img" src="img/miguel.png">
+</section>
+<section>
+    <audio id="somVillager" src="songs/villager.mp3"></audio>
+    <h2>🐝 Versão Mob</h2>
+    <img id="img" src="img/creeper.png" onclick="playCreeper()">
+    <div class="card" onclick="playCreeper()">
+        <p>💣 Daniel = Creeper</p>
+        <p>(explode de raiva)</p>
+    </div>
+    <div class="card" onclick="playVillager()">
+        <p>👃🏾 Miguel = Villager</p>
+        <p>(só faz “hmmm”)</p>
+    </div>
+    <img id="img" src="img/villager.png" onclick="playVillager()">
+</section>
+<section>
+    <h2>🔘 Botões Perigosos</h2>
+    <div class="area">
+        <div id="tnt" class="tnt">TNT</div>
+        <div id="bau" class="bau" onclick="abrirBau()">
+            <div class="tampa"></div>
+            <div class="corpo"></div>
+        </div>
+    </div>    
+    <audio id="somExplosao" src="songs/tnt.mp3"></audio>
+    <audio id="somBau1" src="songs/chest1.mp3"></audio>
+    <audio id="somBau2" src="songs/chest2.mp3"></audio>
+    <audio id="somMacabro" src="songs/scary.mp3"></audio>
+    <button onclick="explodirTNT()">ATIVAR TNT</button>
+    <button onclick="abrirBau()">ABRIR BAÚ</button>
+    <button onclick="botaoProibido()">NÃO CLIQUE</button>
+    <p id="mensagem"></p>
+</section>
+<section>
+    <h2>🎒 Inventário</h2>
+    <audio id="somXP" src="songs/xp.mp3"></audio>
+    <div class="inventory" onclick="playXP()">
+        <div class="slot" data-text="Bolo engana tolo"><img id="img" src="img/cake.png"></div>
+        <div class="slot" data-text="Cofrinho"><img id="img" src="img/diamond.png"></div>
+        <div class="slot" data-text="Estudos"><img id="img" src="img/book.png"></div>
+        <div class="slot" data-text="Cachorro"><img id="img" src="img/bone.png"></div>
+        <div class="slot" data-text="Briga"><img id="img" src="img/tnt.png"></div>
+        <div class="slot" data-text="Bagunça"><img id="img" src="img/flint.png"></div>
+        <div class="slot" data-text="E o PIX?"><img id="img" src="img/gold.png"></div>
+        <div class="slot" data-text="Fome"><img id="img" src="img/bread.png"></div>
+    </div>
+</section>
+<section>
+    <h2>🧩 Missões</h2>
+    <p>✔ Missão 1: Arrumar o quarto (falhou)</p>
+    <p>✔ Missão 2: Parar de riliar (impossível)</p>
+    <p>✔ Missão 3: Ser legal comigo (em progresso)</p>
+</section>
+<section>
+    <h2>🔚 Fim</h2>
+    <div class="final">
+        <div class="texto">
+            <p>
+                Mesmo com bugs, brigas e explosões...<br><br/>
+                Vocês são os melhores irmãos do mundo ❤️<br><br/>
+                🖋 Ass: Samuel Miranda de Carvalho 👑
+            </p>
+        </div>
+        <img id="img" src="img/end.jpeg">
+    </div>
+</section>
+<div id="herobrine" class="herobrine">
+    <img src="img/herobrine.png">
+</div>
+<script>
+    function mensagem(texto) {
+        document.getElementById("mensagem").innerText = texto;
+    }
+    function explodirTNT() {
+        let tnt = document.getElementById("tnt")
+        document.getElementById("somExplosao").play()
+        document.getElementById("mensagem").innerText = "⚠️ TNT ativada... corre!!!"
+        tnt.classList.add("piscando")
+        setTimeout(function() {
+            tnt.classList.add("explodir")
+            document.body.classList.add("treme")
+            document.getElementById("mensagem").innerText = "💥 BOOOOM!!!"
+            setTimeout(function() {
+                tnt.classList.remove("explodir")
+                tnt.classList.remove("piscando")
+                tnt.style.opacity = "1"
+                tnt.style.transform = "scale(1)"
+                tnt.style.background = "red"
+                document.getElementById("mensagem").innerText = ""
+            }, 800)
+        }, 2500)
+    }
+    function abrirBau(){
+        document.getElementById("somBau1").play()
+        let bau = document.getElementById("bau")
+        bau.classList.add("aberto")
+        document.getElementById("mensagem").innerText = '🐱 A curiosidade matou o gato!'
+        setTimeout(() => {
+            document.getElementById("somBau2").play()
+            bau.classList.remove("aberto");
+            document.getElementById("mensagem").innerText = ""
+        }, 2000)
+    }
+    function botaoProibido(){
+        document.getElementById("somMacabro").play()
+        let h = document.getElementById("herobrine");
+        h.classList.add("mostrar");
+        document.body.classList.add("treme");
+        setTimeout(() => {
+            document.body.classList.remove("treme");
+        }, 500);
+        setTimeout(() => {
+            h.classList.remove("mostrar");
+        }, 500);
+        document.getElementById("mensagem").innerText = '⚠️ Eu avisei...'
+        setTimeout(() => {
+            document.getElementById("mensagem").innerText = ""
+        }, 2000)
+    }
+    function playXP(){
+        document.getElementById("somXP").play()
+    }
+    function playVillager(){
+        document.getElementById("somVillager").play()
+    }
+    function playCreeper(){
+        document.getElementById("somExplosao").play()
+    }
+</script>
+</body>
 </html>

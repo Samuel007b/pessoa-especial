@@ -1,14 +1,197 @@
 body {
-  background-color: rgb(82, 82, 255);
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+    background: linear-gradient(#87CEEB, #4CAF50);
+    color: white;
+    text-align: center;
 }
-
+header {
+    background: #2e7d32;
+    padding: 20px;
+    border-bottom: 5px solid #1b5e20;
+}
 h1 {
-  color: rgb(255, 218, 54);
-  text-align: center;
-  font-family:'Courier New', Courier, monospace;
+    font-size: 30px;
+}
+section {
+    margin: 30px;
+    padding: 20px;
+    background: rgba(0,0,0,0.6);
+    border: 3px solid #4CAF50;
+}
+.card {
+    background: #3e2723;
+    padding: 15px;
+    margin: 10px;
+    display: inline-block;
+    width: 200px;
+    border: 3px solid #6d4c41;
+}
+button {
+    font-family: 'Press Start 2P', cursive;
+    background: #4CAF50;
+    border: 3px solid #2e7d32;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+button:hover {
+    background: #66bb6a;
+}
+.inventory {
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    justify-content: center;
+    gap: 10px;
+}
+.slot {
+    width: 80px;
+    height: 80px;
+    background: #9e9e9e;
+    border: 3px solid #616161;
+    position: relative;
+}
+.slot:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    bottom: 90px;
+    left: -20px;
+    background: black;
+    padding: 5px;
+    font-size: 8px;
+    width: 120px;
+}
+#mensagem {
+    margin-top: 20px;
+    font-size: 10px;
+}
+.tnt {
+    width: 80px;
+    height: 80px;
+    background: red;
+    border: 4px solid #8b0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: white;
+}
+@keyframes explosao {
+    0% { transform: scale(1); background: red; }
+    50% { transform: scale(1.5); background: orange; }
+    100% { transform: scale(2); background: yellow; opacity: 0; }
+}
+@keyframes tremer {
+    0% { transform: translate(0); }
+    25% { transform: translate(5px, -5px); }
+    50% { transform: translate(-5px, 5px); }
+    75% { transform: translate(5px, 5px); }
+    100% { transform: translate(0); }
 }
 
-p {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 20px;
+@keyframes piscar {
+    0% { background: red; }
+    50% { background: white; }
+    100% { background: red; }
+}
+.area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+.piscando {
+    animation: piscar 0.3s infinite;
+}
+.treme {
+    animation: tremer 0.3s;
+}
+.explodir {
+    animation: explosao 0.6s forwards;
+}
+.bau {
+    width: 90px;
+    height: 90px;
+    position: relative;
+    cursor: pointer;
+}
+.corpo {
+    width: 100%;
+    height: 55%;
+    position: absolute;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        #6b3f1d 0px,
+        #6b3f1d 10px,
+        #7a4a23 10px,
+        #7a4a23 20px
+    );
+    border: 4px solid #3e1f0f;
+}
+.tampa {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 0;
+    transform-origin: bottom;
+    background: repeating-linear-gradient(
+        90deg,
+        #8b5a2b 0px,
+        #8b5a2b 10px,
+        #a06a35 10px,
+        #a06a35 20px
+    );
+    border: 4px solid #3e1f0f;
+    transition: transform 0.4s;
+}
+.bau::after {
+    content: "";
+    width: 20px;
+    height: 15px;
+    background: gold;
+    position: absolute;
+    left: 55%;
+    top: 40%;
+    transform: translate(-50%, -10%);
+    border: 2px solid #8c6d00;
+}
+.aberto .tampa {
+    transform: rotateX(110deg);
+}
+.final {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap; /* quebra no celular */
+}
+.texto {
+    max-width: 500px;
+    text-align: left;
+}
+.herobrine {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: black;
+    padding: 10px;
+    border: 4px solid red;
+    z-index: 999;
+}
+@keyframes scare {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+.mostrar {
+    animation: scare 0.2s forwards;
+}
+.herobrine::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: -1;
 }
